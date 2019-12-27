@@ -1,0 +1,27 @@
+{% extends "base.html" %}
+
+{% block content %}
+	<h3>Name: {{product.name}}</h3>
+	<h5>Quantity: {{product.quantity}}cs</h5>
+	<p>Price: Rs.{{product.price}}</p>
+{# Product Add form #}
+<form action="{% url 'demo:add_quantity' product.id %}" method="POST">
+	{% csrf_token %}
+  Quantity To Add:  <input type="number" name="quantity" min="1" max="100">
+  <input class="btn btn-success" type="submit" value="Add">
+</form>
+
+{# Product Delete form #}
+<br>
+<br>
+<form method="POST" action="{% url 'demo:delete_quantity' product.id %}">
+	{% csrf_token %}
+	Quantity To Delete: <input type="number" name="quantity" min="1" max="100">
+	<input type="submit" value="Delete" class="btn btn-success">
+</form>
+
+
+<a href="{% url 'demo:list' %}" class="btn btn-primary my-4" role="button">Back To Products</a>
+{% endblock content %}
+
+{# {% url 'demo:add_quantity' product.id %} #}

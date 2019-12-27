@@ -1,0 +1,100 @@
+<!DOCTYPE html>
+{% load staticfiles %}
+<html>
+<head>
+	<title>SHOP</title>
+	<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+	<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js" integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM" crossorigin="anonymous"></script>
+	<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js" integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1" crossorigin="anonymous"></script>
+	<script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
+
+	<link rel="stylesheet" type="text/css" href="{% static "css/styles.css" %}">
+
+</head>
+<body>
+
+<div class="container">
+
+	<div class="row mt-4">
+		<div class="col-md-12">
+			<form class="card card-sm">
+				<div class="card-body row no-gutters align-items-center">
+					<div class="col">
+						<input type="search" name="item_name" placeholder="Search for products" class="form-control form-control-borderless">
+					</div>
+					<div class="col-auto">
+						<button class="btn btn-success" type="submit">Search</button>
+					</div>
+				</div>
+			</form>
+			
+		</div>
+		
+	</div>
+
+	<div class="row mt-5">
+	{% for product in products %}
+		<div class="col-md-4">	
+			<div class="card" style="width: 18rem;">
+			  <img src="{{product.image}}" class="card-img-top" alt="...">
+			  <div class="card-body">
+			    <h5 class="card-title">{{product.title}}</h5>
+			    <p class="card-text"><span>&#8377 </span>{{product.price}}</p>
+			    <a href="#" class="btn btn-primary">View</a>
+			  </div>
+			</div>
+		</div>
+			
+		{% endfor %}
+	</div>
+	
+	<div class="row mt-4 ml-5">
+		<div class="col-md-3 offset-md-4">
+			<ul class="pagination">
+				{% if products.has_previous %}
+
+					<li class="page-item">
+						<a class="page-link" href="?page={{products.previous_page_number}}">Back</a>
+					</li>
+					
+				{% endif %}
+
+					<li class="page-item active">
+						<a class="page-link" href="?page={{products.number}}">Current</a>
+					</li>
+
+				{% if products.has_next %}
+
+					<li class="page-item">
+						<a class="page-link" href="?page={{products.next_page_number}}">Next</a>
+						
+					</li>
+					
+				{% endif %}
+			</ul>
+
+			
+		</div>
+		
+	</div>
+	
+</div>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+</body>
+</html>
